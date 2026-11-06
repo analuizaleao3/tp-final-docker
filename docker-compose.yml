@@ -1,0 +1,19 @@
+# Dois serviços orquestrados pelo Docker Compose
+services:
+
+  # Serviço 1: site estático com imagem customizada (build a partir do Dockerfile)
+  site:
+    build: .
+    image: meu-nginx-customizado
+    container_name: site_nginx
+    ports:
+      - "8080:80"   # host:container
+
+  # Serviço 2: servidor HTTP simples (Apache) com imagem oficial
+  app2:
+    image: httpd:alpine
+    container_name: app2_httpd
+    ports:
+      - "8081:80"   # host:container
+    volumes:
+      - ./index2.html:/usr/local/apache2/htdocs/index.html:ro
